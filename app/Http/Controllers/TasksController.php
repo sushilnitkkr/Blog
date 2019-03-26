@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Task;
+use App\User;
+use Illuminate\Support\Facades\DB;
+
 use Session;
 class TasksController extends Controller
 {
@@ -14,8 +17,8 @@ class TasksController extends Controller
 
   public function wel()
     {
-      $user = Auth::user();
-      return view('wel',compact('user'));
+     $user = DB::table('tasks')->select('id','title','description')->get();
+       return view('wel',compact('user'));
     }
 
     public function add(){
@@ -32,28 +35,40 @@ class TasksController extends Controller
    }
    public function edit(Task $task)
    {
-   	if (Auth::check() && Auth::user()->id ==$task->user_id) {
    		return view('edit',compact('task'));
-   	}
-   	else
-   	{
-   		return redirect('/');
-   	}
+
    }
    public function update(Request $request,Task $task)
    {
-        $task->title = $request->title;
-   		$task->description = $request->description;
-   		$task->save();
-   		return redirect('/');
-   }
+    if(isset($_POST['delete']))
+    {
 
- public function destroy(Task $task)
-   {
-   $task->delete();
+      $task->delete();
+
+    //return view('welcome');
+      return redirect()->back()->with('success','Member deleted');
+      //return response()->json(['success'=>"Toto list deleted successfully."]);
+    }
+    else{
+      $task->description = $request->description;
+      $task->save();
       return redirect('/');
-
+    }
    }
+   // public function update(Request $request,Task $task)
+   // {
+   //      $task->title = $request->title;
+   // 		$task->description = $request->description;
+   // 		$task->save();
+   // 		return redirect('/');
+   // }
+
+ // public function destroy(Task $task)
+ //   {
+ //   $task->delete();
+ //      return redirect('/');
+
+ //   }
 
 
 }

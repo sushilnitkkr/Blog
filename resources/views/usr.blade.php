@@ -5,7 +5,7 @@
     <div class="col-lg-3">
     </div>
     <div class="col-lg-6">
-                @if (Auth::check())
+                @if (auth()->user()->!isAdmin())
                         <h2>Blogs</h2>
                         <a href="/task" class="task fa">Add new Post</a>
                         <table class="table">
@@ -17,17 +17,17 @@
                                 <td>
                                  <p><strong>Post Title:</strong>   <a href="/task/{{ $task->id }}">{{$task->title}}</a></p>
 
-                                       {{-- <a href="/task/{{ $task->id }}" class="task fa fa-edit"> Edit Post</a> --}}
+                                       <a href="/task/{{ $task->id }}" class="task fa fa-edit"> Edit Post</a>
                                   <p><strong>Post Description:</strong>   {{$task->description}}</p>
 
-                                   {{-- <a href="/task/{{ $task->id }}" id='delete'class="task fa fa-edit"> Delete Post</a> --}}
+                                   <a href="/task/{{ $task->id }}" id='delete'class="task fa fa-edit"> Delete Post</a>
 
-                                    <form action="/task/{{$task->id}}">
-                                            <button type="submit" name="edit" class="btn btn-primary">Edit</button>
+               {{--                      <form action="/task/{{$task->id}}">
+
                                         <button type="submit" name="delete" formmethod="POST" class="btn btn-danger">Delete</button>
                                         {{ csrf_field() }}
 
-                                    </form>
+                                    </form> --}}
 
                                     </td>
                              </tr>

@@ -27,3 +27,4 @@ Route::get('/task/{task}','TasksController@edit');
 Route::post('/task/{task}','TasksController@update');
 Route::delete('/task{task}','TasksController@destroy');
 Route::get('/wel', 'TasksController@wel')->middleware('is_admin')->name('admin');
+//Route::get('/', 'TasksController@wel');
