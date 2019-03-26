@@ -1,0 +1,27 @@
+.task {
+float: right;
+    margin-bottom: 15px;
+    margin-top: -30px;
+}
+.container {
+min-height: 100%;
+position: relative;
+    }
+.fotr {
+    position: absolute;
+    bottom: 0;
+    margin-left: 35%;
+   width:100%;
+   height: 50px;
+}
+.text-muted {
+    color: #6c757d!important;
+    text-align: center;
+    }
+
+    .body{
+       min-height: 100%;
+position: absolute;
+    }
+
+
